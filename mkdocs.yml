@@ -1,0 +1,18 @@
+site_name: CoE MLOps Playbook
+site_url: https://coe-mlops.com/
+repo_url: https://github.com/DJuanes/coe-mlops-playbook/
+nav:
+- Home: index.md
+- workflows:
+    - main: coe_template/main.md
+- coe_template:
+    - data: coe_template/data.md
+    - evaluate: coe_template/evaluate.md
+    - predict: coe_template/predict.md
+    - train: coe_template/train.md
+    - utils: coe_template/utils.md
+theme: readthedocs
+plugins:
+- mkdocstrings
+watch:
+- .  # recargar documentos para cualquier cambio de archivo

@@ -39,11 +39,6 @@ clean: style
 .PHONY: test
 test:
 	pytest -m "not training"
+	cd tests && great_expectations checkpoint run projects
 	cd tests && great_expectations checkpoint run tags
-
-.PHONY: dvc
-dvc:
-	dvc add data/projects.csv
-	dvc add data/tags.csv
-	dvc add data/labeled_projects.csv
-	dvc push
+	cd tests && great_expectations checkpoint run labeled_projects

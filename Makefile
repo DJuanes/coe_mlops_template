@@ -39,6 +39,7 @@ clean: style
 .PHONY: test
 test:
 	pytest -m "not training"
+	cd tests && great_expectations checkpoint run tags
 
 .PHONY: dvc
 dvc:

@@ -190,7 +190,7 @@ class LabelEncoder:
         Returns:
             Instancia de LabelEncoder.
         """
-        with open(fp, "r") as fp:
+        with open(fp) as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 

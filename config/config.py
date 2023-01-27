@@ -1,9 +1,9 @@
-from pathlib import Path
-import mlflow
 import logging
 import sys
-from rich.logging import RichHandler
+from pathlib import Path
 
+import mlflow
+from rich.logging import RichHandler
 
 # Directorios
 BASE_DIR = Path(__file__).parent.parent.absolute()
@@ -14,14 +14,16 @@ LOGS_DIR = Path(BASE_DIR, "logs")
 
 # Stores
 MODEL_REGISTRY = Path(STORES_DIR, "model")
+BLOB_STORE = Path(STORES_DIR, "blob")
 
 # Crear carpetas
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 MODEL_REGISTRY.mkdir(parents=True, exist_ok=True)
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
+BLOB_STORE.mkdir(parents=True, exist_ok=True)
 
 # Registro del modelo MLFlow
-mlflow.set_tracking_uri("file:\\" + str(MODEL_REGISTRY.absolute()))
+mlflow.set_tracking_uri("file:///" + str(MODEL_REGISTRY.absolute()))
 
 # Logger
 logging_config = {
@@ -30,7 +32,8 @@ logging_config = {
     "formatters": {
         "minimal": {"format": "%(message)s"},
         "detailed": {
-            "format": "%(levelname)s %(asctime)s [%(name)s:%(filename)s:%(funcName)s:%(lineno)d]\n%(message)s\n"
+            "format": "%(levelname)s %(asctime)s [%(name)s:%(filename)s:%(funcName)s:"
+            "%(lineno)d]\n%(message)s\n"
         },
     },
     "handlers": {
@@ -68,7 +71,9 @@ logger = logging.getLogger()
 logger.handlers[0] = RichHandler(markup=True)  # pretty formatting
 
 # Activos
-PROJECTS_URL = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.csv"
+PROJECTS_URL = (
+    "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.csv"
+)
 TAGS_URL = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.csv"
 
 ACCEPTED_TAGS = ["natural-language-processing", "computer-vision", "mlops", "graph-learning"]

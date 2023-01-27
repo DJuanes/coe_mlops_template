@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from config import config
 from coe_template import main, predict
+from config import config
 
 
 @pytest.fixture(scope="module")
@@ -27,7 +27,8 @@ def artifacts():
     ],
 )
 def test_inv(text, tag, artifacts):
-    """INVariance a través de inyección de verbos (los cambios no deberían afectar los resultados)."""
+    """INVariance a través de inyección de verbos \
+        (los cambios no deberían afectar los resultados)."""
     predicted_tag = predict.predict(texts=[text], artifacts=artifacts)[0]["predicted_tag"]
     assert tag == predicted_tag
 
@@ -46,7 +47,7 @@ def test_inv(text, tag, artifacts):
         (
             "CNNs for text classification.",
             "natural-language-processing",
-        )
+        ),
     ],
 )
 def test_dir(text, tag, artifacts):

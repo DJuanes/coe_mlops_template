@@ -1,16 +1,15 @@
-from http import HTTPStatus
-from typing import Dict
 from datetime import datetime
 from functools import wraps
+from http import HTTPStatus
 from pathlib import Path
-
-from config import config
-from config.config import logger
-from coe_template import main, predict
-from app.schemas import PredictPayload
+from typing import Dict
 
 from fastapi import FastAPI, Request
 
+from app.schemas import PredictPayload
+from coe_template import main, predict
+from config import config
+from config.config import logger
 
 # Definir aplicación
 app = FastAPI(
@@ -65,7 +64,7 @@ def _index(request: Request) -> Dict:
 def _performance(request: Request, filter: str = None) -> Dict:
     """Obtener las métricas de performance."""
     performance = artifacts["performance"]
-    data = {"performance":performance.get(filter, performance)}
+    data = {"performance": performance.get(filter, performance)}
     response = {
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,

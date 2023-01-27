@@ -127,7 +127,9 @@ def load_artifacts(run_id: str = None) -> Dict:
     """
     # Localizar el directorio específicos de los artefactos
     experiment_id = mlflow.get_run(run_id=run_id).info.experiment_id
+    logger.info("experiment id: %s", experiment_id)
     artifacts_dir = Path(config.MODEL_REGISTRY, experiment_id, run_id, "artifacts")
+    logger.info("artifacts dir: %s", artifacts_dir)
 
     # Cargar objetos desde la ejecución
     args = Namespace(**utils.load_dict(filepath=Path(artifacts_dir, "args.json")))
@@ -156,6 +158,7 @@ def predict_tag(text: str = "", run_id: str = None) -> None:
     """
     if not run_id:
         run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
+    logger.info("run id: %s", run_id)
     artifacts = load_artifacts(run_id=run_id)
     prediction = predict.predict(texts=[text], artifacts=artifacts)
     logger.info(json.dumps(prediction, indent=2))

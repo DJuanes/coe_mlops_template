@@ -4,9 +4,9 @@ import mlflow
 import pytest
 from typer.testing import CliRunner
 
-from config import config
 from coe_template import main
 from coe_template.main import app
+from config import config
 
 runner = CliRunner()
 args_fp = Path(config.BASE_DIR, "tests", "code", "test_args.json")
